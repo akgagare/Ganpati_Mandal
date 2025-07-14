@@ -5,6 +5,8 @@ import Register from './Admin/Register'
 import Login from './Admin/Login'
 import { Toaster } from 'react-hot-toast'
 import ProtectedRoute from './ProtectedRoute'
+import Certificate from './PDF/Certificate'
+import DonationForm from './DonationForm' 
 
 const App = () => {
   return (
@@ -21,6 +23,8 @@ const App = () => {
         />
         <Route path='/admin/register' element={<Register/>}/>
         <Route path='/admin/login' element={<Login/>}/>
+        <Route path='/certificate' element={<Certificate/>}></Route>
+        <Route path='/donation-form' element={<DonationForm/>}></Route>
       </Routes>
     </BrowserRouter>
   )
