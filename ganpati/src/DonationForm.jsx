@@ -38,7 +38,7 @@ const DonationForm = () => {
   try {
     console.log("formData", formdata);
 
-    const response = await axios.post('http://localhost:3000/api/donar/create', formdata);
+    const response = await axios.post('https://ganpati-mandal.onrender.com/api/donar/create', formdata);
     console.log(response.data.data);
 
     if (response.status === 201 || response.status === 200) {

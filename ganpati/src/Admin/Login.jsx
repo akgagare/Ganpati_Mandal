@@ -22,7 +22,7 @@ const Login = () => {
  const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/api/admin/login', formdata);
+      const response = await axios.post('https://ganpati-mandal.onrender.com/api/admin/login', formdata);
       // Assuming status is 200
       toast.success("Login Successful");
 

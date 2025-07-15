@@ -24,7 +24,7 @@ const Register = () => {
     }
 
     try{
-      const response = await axios.post('http://localhost:3000/api/admin/register',formdata);
+      const response = await axios.post('https://ganpati-mandal.onrender.com/api/admin/register',formdata);
       console.log("response", response);
       if(response.ok){
         toast.success("Admin Registered Successfully");
