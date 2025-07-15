@@ -84,7 +84,7 @@ const Login = () => {
           <h2 className="flex flex-wrap justify-center items-center gap-2 bg-orange-300 shadow-md rounded-full px-6 py-3 text-lg font-semibold text-gray-800">
             Don't have an account?
             <button
-              onClick={() => navigate('/admin/register/')}
+              onClick={() => navigate('/admin/register')}
               className="bg-orange-400 hover:bg-orange-300 transition-colors duration-600 text-white font-bold px-4 py-2 rounded-full"
             >
               Register

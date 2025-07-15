@@ -22,7 +22,7 @@ const App = () => {
             </ProtectedRoute>
           }
         /> */}
-        <Route path='/admin/register/' element={<Register/>}/>
+        <Route path='/admin/register' element={<Register/>}/>
         <Route path='/' element={<Login/>}/>
         <Route path='/certificate' element={<Certificate/>}></Route>
         <Route path='/no-certificate' element={<NoCertificate/>}></Route>
