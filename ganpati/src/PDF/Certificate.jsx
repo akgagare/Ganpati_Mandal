@@ -2,27 +2,64 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndianRupeeSign } from '@fortawesome/free-solid-svg-icons';
 import { useLocation } from 'react-router-dom';
+import { useRef } from 'react';
+import { jsPDF } from "jspdf";
+import html2canvas from 'html2canvas-pro';
 
 const Certificate = () => {
   const {state} = useLocation();
+  const printRef = useRef(null);
 
   if(!state){
     return(<div>Sorry No Data Found.</div>)
   }
 
+  const generatePDF = async()=>{
+    try{
+      const element = printRef.current;
+      
+      if(!element){
+        return;
+      }
+
+      const canvas = await html2canvas(element);
+      const data = canvas.toDataURL('image/png');
+
+      // Default export is a4 paper, portrait, using millimeters for units
+      const pdf = new jsPDF({
+        orientation: "portrait",
+        unit: "px",
+        format: 'a4'
+      });
+
+      // doc.text("Hello world!", 10, 10);
+      // doc.save("a4.pdf");
+      const ImageProperties = pdf.getImageProperties(data);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (ImageProperties.height * pdfWidth) / ImageProperties.width;
+
+      pdf.addImage(data,'PNG',0,0,pdfWidth,pdfHeight);
+      pdf.save(`${state.name}_receipt.pdf`);
+      console.log("element",element);
+    }
+    catch(error){
+      console.log("Error in PDF generation",error);
+    }
+  }
+
 
   return (
-    <div className='relative min-h-screen'>
-         <div
-          className="absolute inset-0 bg-no-repeat bg-contain bg-center z-0"
-          style={{
-            backgroundImage: "url('/bg-image.jpeg')",
-            opacity: 0.2, // watermark effect
-            pointerEvents: 'none', // allows clicking through background
-          }}
-      ></div>
+    <div className='relative min-h-screen' ref={printRef}>
+      <div>
+         <div className="absolute inset-0 z-0">
+          <img
+            src="/bg-image.jpeg"
+            alt="Background"
+            className="w-full h-full object-contain opacity-20 pointer-events-none"
+          />
+        </div>
       
-        <div className='flex-col justify-center h-90% w-50% border-2 border-black m-5 rounded-2xl p-3'>
+        <div className='flex-col justify-center h-90% w-50% border-2 border-black m-5 rounded-2xl p-3 z-100'>
           <div className='flex justify-center z-20'>
             <h2 className='flex bg-red-700 rounded-2xl h-10 w-40 items-center justify-center text-white'>Receipt</h2>
           </div>
@@ -37,7 +74,7 @@ const Certificate = () => {
                     <p>New Delhi - 110016</p>
                     <div className='flex gap-3'>
                       <p><span className='font-bold'>Mob</span>: 7065088873</p>
-                      <p><span className='font-bold'>Ph</span>: 011-26866801</p>
+                      <p><span className='font-bold'>Phone</span>: 011-26866801</p>
                     </div>
                     <p><span className='font-bold'>Email</span> : contributions@gmail.org</p>
                   </div>
@@ -61,16 +98,16 @@ const Certificate = () => {
                 </div>
                 <p className=''>a Sum of Rupee:<span className='font-bold ml-3'>{state.amount_in_words}</span></p>
                 <div className='flex gap-20'>
-                  <p>by:{state.name}</p>
-                  <p>No:{state.transaction_no}</p>
-                  <p>Installment Date:{new Date(state.date).toLocaleDateString()}</p>
+                  <p>by:<span className='font-bold ml-2'>{state.name}</span></p>
+                  <p>No:<span className='font-bold ml-2'>{state.transaction_no}</span></p>
+                  <p>Installment Date:<span className='font-bold ml-2'>{new Date(state.date).toLocaleDateString()}</span></p>
                 </div>  
                 <p>towards voluntary donation</p>
             </div>
 
              <div className='flex mt-8 items-center'>
                 <FontAwesomeIcon icon={faIndianRupeeSign} className='text-3xl'/>  
-                <h1 className='font-bold text-3xl'>{state.amount}</h1>
+                <h1 className='font-bold text-3xl text-orange-500'>{state.amount}</h1>
              </div>
 
             {/* orange div */}
@@ -92,6 +129,12 @@ const Certificate = () => {
               <div>
               </div>
             </div>
+          </div>
+        </div>
+        <div className='flex z-20 justify-center'>
+          <button className='h-20 w-40 bg-green-400 rounded-2xl text-2xl font-bold text-white z-100' onClick={generatePDF}>
+            Generate PDF
+          </button>
         </div>
     </div>
   )

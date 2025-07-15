@@ -28,7 +28,7 @@ const Login = () => {
 
       // Small delay to ensure toast is visible before navigating (optional)
       setTimeout(() => {
-        navigate('/');
+        navigate('/donation-form');
       }, 500);
       localStorage.setItem('token',response.data.token);
     } catch (error) {
@@ -40,7 +40,7 @@ const Login = () => {
 
  return (
     <div className="backdrop-blur-lg min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-orange-300 dark:from-zinc-900 dark:to-zinc-800 px-4">
-      <div className="backdrop-blur-lg w-full max-w-md bg-white/35   dark:bg-zinc-900 rounded-2xl shadow-2xl p-8 my-4">
+      <div className="backdrop-blur-lg w-full max-w-md bg-white/35   dark:bg-zinc-900 rounded-2xl shadow-2xl p-8 mt-10">
         <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-1">Welcome</h2>
         <p className="text-sm text-gray-600 dark:text-gray-300 mb-6">
           Please Login

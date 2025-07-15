@@ -22,9 +22,10 @@ const Register = () => {
       toast.error("Passwords do not match");
       return;
     }
+
     try{
       const response = await axios.post('http://localhost:3000/api/admin/register',formdata);
-      console.log("response",response);
+      console.log("response", response);
       if(response.ok){
         toast.success("Admin Registered Successfully");
       }
