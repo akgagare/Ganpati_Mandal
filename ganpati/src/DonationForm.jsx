@@ -5,6 +5,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom';
+import './App.css'
 
 const DonationForm = () => {
   const [amount,setAmount] = useState(0);
@@ -54,9 +55,9 @@ const DonationForm = () => {
 };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <form className="w-full max-w-3xl bg-white shadow-xl rounded-2xl p-6 md:p-10 space-y-6">
-        <h2 className="text-3xl font-bold text-center text-red-600 mb-4">Donation Receipt Form</h2>
+    <div className="min-h-screen bg-gradient-to-r from-white to-green-500 flex items-center justify-center p-4">
+      <form className="w-full max-w-3xl bg-green-200 shadow-2xl rounded-2xl p-6 md:p-10 space-y-6">
+        <h2 className="text-3xl font-bold text-center text-gray-600 mb-4 custom-text-shadow">Donation Receipt Form</h2>
 
         {/* Name Input */}
         <div>
@@ -67,7 +68,7 @@ const DonationForm = () => {
             placeholder="Enter Full Name"
             value={formdata.name}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+            className="w-full bg-green-100 border border-gray-300 rounded-md px-4 py-2 focus:outline-none "
           />
         </div>
 
@@ -81,7 +82,7 @@ const DonationForm = () => {
               value={formdata.PAN}
               placeholder="Enter PAN"
               onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full bg-green-100 border border-gray-300 rounded-md px-4 py-2 focus:outline-none "
             />
           </div>
           <div className="flex-1">
@@ -92,7 +93,7 @@ const DonationForm = () => {
               value={formdata.mobile}
               onChange={handleChange}
               placeholder="Enter Mobile Number"
-              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full bg-green-100 border border-gray-300 rounded-md px-4 py-2 focus:outline-none "
             />
           </div>
           
@@ -105,7 +106,7 @@ const DonationForm = () => {
               value={formdata.email}
               placeholder="xyz@gmail.com"
               onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full bg-green-100 border border-gray-300 rounded-md px-4 py-2 focus:outline-none"
             />
           </div>
 
@@ -118,7 +119,7 @@ const DonationForm = () => {
             value={formdata.address}
             placeholder="Enter Address"
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+            className="w-full bg-green-100 border border-gray-300 rounded-md px-4 py-2 focus:outline-none "
           />
         </div>
 
@@ -130,7 +131,7 @@ const DonationForm = () => {
             id='amount'
             value={formdata.amount}
             placeholder="1000/-"
-            className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+            className="w-full bg-green-100 border border-gray-300 rounded-md px-4 py-2 focus:outline-none"
             onChange={handleChange}
           />
         </div>
@@ -143,7 +144,7 @@ const DonationForm = () => {
             value={formdata.amount_in_words}
             placeholder="One Thousand Only/-"
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+            className="w-full bg-green-100 border border-gray-300 rounded-md px-4 py-2 focus:outline-none"
           />
         </div>
 
@@ -157,7 +158,7 @@ const DonationForm = () => {
               value={formdata.payment_mode}
               placeholder="Cash / UPI / Cheque"
               onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full border bg-green-100 border-gray-300 rounded-md px-4 py-2 focus:outline-none "
             />
           </div>
           <div>
@@ -165,10 +166,11 @@ const DonationForm = () => {
             <input
               type="number"
               id='transaction_no'
+              
               value={formdata.transaction_no}
               onChange={handleChange}
               placeholder="Transaction/Cheque No"
-              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full bg-green-100 border border-gray-300 rounded-md px-4 py-2 focus:outline-none"
             />
           </div>
           <div>
@@ -178,13 +180,14 @@ const DonationForm = () => {
               id='date'
               onChange={handleChange}
               value={formdata.date}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+              placeholder='DD/MM/YYYY'
+              className="w-full bg-green-100 border border-gray-300 rounded-md px-4 py-2 focus:outline-none "
             />
           </div>
         </div>
 
         {/* Amount Box */}
-        <div className="flex items-center justify-center gap-2 text-3xl font-bold text-green-600 mt-4">
+        <div className="flex items-center justify-center gap-2 text-3xl font-bold text-black-300 mt-4">
           <FontAwesomeIcon icon={faIndianRupeeSign} />
           <span>{amount}</span>
         </div>
@@ -193,7 +196,7 @@ const DonationForm = () => {
         <div className="text-center">
           <button
             type="submit"
-            className="bg-red-600 text-white text-lg px-6 py-2 rounded-full hover:bg-red-700 transition duration-300"
+            className="backdrop-blur bg-white/30 text-black shadow-2xl shadow-green-900 text-lg px-6 py-2 rounded-full  transition duration-300"
             onClick={handleSubmit}
           >
             Save & Generate Receipt

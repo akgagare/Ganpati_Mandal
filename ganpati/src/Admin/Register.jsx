@@ -130,8 +130,17 @@ const Register = () => {
           >
             Sign up →
           </button>
+          <h2 className="flex flex-wrap justify-center items-center gap-2 bg-red-200 shadow-md rounded-full px-6 py-3 text-lg font-semibold text-gray-800">
+            Already have an account ?
+            <button
+              onClick={() => navigate('/')}
+              className="bg-pink-500 hover:bg-red-200 transition-colors duration-600 text-white font-bold px-4 py-2 rounded-full"
+            >
+              Login
+            </button>
+          </h2>
 
-          <div className="my-6 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent dark:via-gray-600" />
+          <div className="my-6 h-px bg-gradient-to-r from-transparent via-gray-500 to-transparent dark:via-gray-600" />
         </form>
       </div>
     </div>

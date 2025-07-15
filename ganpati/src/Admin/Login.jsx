@@ -4,6 +4,7 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
 const Login = () => {
   const navigate = useNavigate();
   const [formdata,setFormData] = useState({
@@ -80,7 +81,16 @@ const Login = () => {
           >
             Login
           </button>
-
+          <h2 className="flex flex-wrap justify-center items-center gap-2 bg-orange-300 shadow-md rounded-full px-6 py-3 text-lg font-semibold text-gray-800">
+            Don't have an account?
+            <button
+              onClick={() => navigate('/admin/register')}
+              className="bg-orange-400 hover:bg-orange-300 transition-colors duration-600 text-white font-bold px-4 py-2 rounded-full"
+            >
+              Register
+            </button>
+          </h2>
+  
           <div className="my-6 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent dark:via-gray-600" />
         </form>
       </div>

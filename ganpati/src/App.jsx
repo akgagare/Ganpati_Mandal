@@ -13,16 +13,16 @@ const App = () => {
     <BrowserRouter>
        <Toaster position="top-center" />
       <Routes>
-        <Route
+        {/* <Route
           path="/"
           element={
             <ProtectedRoute >
               <Home />
             </ProtectedRoute>
           }
-        />
+        /> */}
         <Route path='/admin/register' element={<Register/>}/>
-        <Route path='/admin/login' element={<Login/>}/>
+        <Route path='/' element={<Login/>}/>
         <Route path='/certificate' element={<Certificate/>}></Route>
         <Route path='/donation-form' element={<DonationForm/>}></Route>
       </Routes>
