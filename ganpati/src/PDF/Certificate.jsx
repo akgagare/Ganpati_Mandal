@@ -11,40 +11,88 @@ const Certificate = () => {
   const printRef = useRef(null);
 
   if(!state){
-    return(<div>Sorry No Data Found.</div>)
+    return(<div>
+
+    </div>)
   }
 
+  // const generatePDF = async()=>{
+  //     try {
+  //     const element = printRef.current;
+  //     if (!element) return;
+
+  //     // Apply a custom scale style for high-quality capture
+  //     const originalStyle = element.style.transform;
+  //     element.style.transform = "scale(1)"; // reset scale
+
+
+  //     const data = canvas.toDataURL("image/png");
+  //     const pdf = new jsPDF({
+  //       orientation: "portrait",
+  //       unit: "px",
+  //       format: "a4",
+  //     });
+
+  //     const imgProps = pdf.getImageProperties(data);
+  //     const pdfWidth = pdf.internal.pageSize.getWidth();
+  //     const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+  //     pdf.addImage(data, "PNG", 0, 0, 350, 300);
+  //     pdf.save(`${state.name}_receipt.pdf`);
+
+  //     // Reset style
+  //     element.style.transform = originalStyle;
+  //   } catch (error) {
+  //     console.error("Error in PDF generation", error);
+  //   }
+  // }
+
+
   const generatePDF = async()=>{
-    try{
-      const element = printRef.current;
+   try {
+    const element = printRef.current;
+    if (!element) return;
 
-      if(!element){
-        return;
-      }
+    // 🔒 Backup original styles
+    const originalWidth = element.style.width;
+    const originalTransform = element.style.transform;
 
-      const canvas = await html2canvas(element);
-      const data = canvas.toDataURL('image/png');
+    // 🛠️ Force a desktop-like fixed width for consistent rendering
+    element.style.width = "1024px";
+    element.style.transform = "scale(1)";
 
-      // Default export is a4 paper, portrait, using millimeters for units
-      const pdf = new jsPDF({
-        orientation: "portrait",
-        unit: "px",
-        format: 'a4'
-      });
+    // 📸 Capture the element as high-res image
+    const canvas = await html2canvas(element, {
+      scale: 2,
+      useCORS: true,
+    });
 
-      // doc.text("Hello world!", 10, 10);
-      // doc.save("a4.pdf");
-      const ImageProperties = pdf.getImageProperties(data);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (ImageProperties.height * pdfWidth) / ImageProperties.width;
+    // 🖼️ Convert canvas to image data
+    const data = canvas.toDataURL("image/png");
 
-      pdf.addImage(data,'PNG',0,0,pdfWidth,pdfHeight);
-      pdf.save(`${state.name}_receipt.pdf`);
-      console.log("element",element);
-    }
-    catch(error){
-      console.log("Error in PDF generation",error);
-    }
+    // 📄 Create A4 PDF
+    const pdf = new jsPDF({
+      orientation: "portrait",
+      unit: "px",
+      format: "a4",
+    });
+
+    const imgProps = pdf.getImageProperties(data);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+    // 🧩 Add image dynamically fitted to PDF page
+    pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
+
+    // 💾 Download the file
+    pdf.save(`${state.name}_receipt.pdf`);
+
+    // 🔄 Restore original styles
+    element.style.width = originalWidth;
+    element.style.transform = originalTransform;
+  } catch (error) {
+    console.error("Error in PDF generation", error);
+  }
   }
 
 

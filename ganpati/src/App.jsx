@@ -7,6 +7,7 @@ import { Toaster } from 'react-hot-toast'
 import ProtectedRoute from './ProtectedRoute'
 import Certificate from './PDF/Certificate'
 import DonationForm from './DonationForm' 
+import NoCertificate from './PDF/NoCertificate'
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Route path='/admin/register' element={<Register/>}/>
         <Route path='/' element={<Login/>}/>
         <Route path='/certificate' element={<Certificate/>}></Route>
+        <Route path='/no-certificate' element={<NoCertificate/>}></Route>
         <Route path='/donation-form' element={<DonationForm/>}></Route>
       </Routes>
     </BrowserRouter>
