@@ -30,7 +30,7 @@ const Register = () => {
         toast.success("Admin Registered Successfully");
       }
       console.log(response);
-      navigate('/admin/login');
+      navigate('/');
       return;
     }
     catch(error){
